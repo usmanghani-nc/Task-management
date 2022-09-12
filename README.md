@@ -2,4 +2,4 @@
  
 Tech used 
 Angular 14 and AWS-serverless(NodeJS) with SAM CLI 
-Lambda + API GETWAY + DynamoDB
+Lambda + API Gateway + DynamoDB
