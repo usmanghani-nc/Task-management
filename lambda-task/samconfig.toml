@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "task-app"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1aj55vvcslc5o"
+s3_prefix = "task-app"
+region = "eu-central-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []
