@@ -16,25 +16,27 @@ export class TaskService {
   private apiUrl: string =
     'https://1x2xylnta8.execute-api.eu-central-1.amazonaws.com/Prod';
 
+  tasks: Task[] = [];
+
   constructor(private http: HttpClient) {}
 
-  getTasks() {
-    return this.http.get(this.apiUrl);
+  getTasks(): Observable<Task> {
+    return this.http.get<Task>(this.apiUrl);
   }
 
-  deleteTask(task: Task) {
-    return this.http.delete(`${this.apiUrl}/${task.id}`);
+  deleteTask(task: Task): Observable<Task> {
+    return this.http.delete<Task>(`${this.apiUrl}/${task.id}`);
   }
 
-  updateTaskActive(task: Task) {
-    return this.http.put(`${this.apiUrl}/${task.id}`, task, httpOptions);
+  updateTaskActive(task: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.apiUrl}/${task.id}`, task, httpOptions);
   }
 
-  updateTaskDone(task: Task) {
-    return this.http.put(`${this.apiUrl}/${task.id}`, task, httpOptions);
+  updateTaskDone(task: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.apiUrl}/${task.id}`, task, httpOptions);
   }
 
-  addNewTask(task: Task) {
-    return this.http.post(this.apiUrl, task, httpOptions);
+  addNewTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(this.apiUrl, task, httpOptions);
   }
 }
