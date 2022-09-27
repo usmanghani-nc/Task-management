@@ -14,29 +14,39 @@ const httpOptions = {
 })
 export class TaskService {
   private apiUrl: string =
-    'https://1x2xylnta8.execute-api.eu-central-1.amazonaws.com/Prod';
-
-  tasks: Task[] = [];
+    'https://aef3xu4820.execute-api.eu-central-1.amazonaws.com/Prod';
 
   constructor(private http: HttpClient) {}
 
-  getTasks(): Observable<Task> {
-    return this.http.get<Task>(this.apiUrl);
+  getTasks(): Observable<{ data: Task[] }> {
+    return this.http.get<{ data: Task[] }>(`${this.apiUrl}/tasks`);
   }
 
   deleteTask(task: Task): Observable<Task> {
-    return this.http.delete<Task>(`${this.apiUrl}/${task.id}`);
+    return this.http.delete<Task>(`${this.apiUrl}/task/${task.id}`);
   }
 
   updateTaskActive(task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.apiUrl}/${task.id}`, task, httpOptions);
+    return this.http.put<Task>(
+      `${this.apiUrl}/task/${task.id}`,
+      task,
+      httpOptions
+    );
   }
 
   updateTaskDone(task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.apiUrl}/${task.id}`, task, httpOptions);
+    return this.http.put<Task>(
+      `${this.apiUrl}/task/${task.id}`,
+      task,
+      httpOptions
+    );
   }
 
-  addNewTask(task: Task): Observable<Task> {
-    return this.http.post<Task>(this.apiUrl, task, httpOptions);
+  addNewTask(task: Task): Observable<{ data: Task }> {
+    return this.http.post<{ data: Task }>(
+      `${this.apiUrl}/task`,
+      task,
+      httpOptions
+    );
   }
 }

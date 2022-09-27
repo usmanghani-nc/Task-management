@@ -1,1 +1,9 @@
-<p>list works!</p>
+<div
+  class="mb-[15px] border rounded-lg py-[17px] px-[20px] bg-slate-100"
+  (click)="onDelete(task)"
+>
+  <h2 class="mb-[3px] text-[20px] font-semibold">{{ task.task }}</h2>
+  <p class="text-[15px] text-slate-500">{{ task.description }}</p>
+  <!-- done : {{ task.done }} 
+ acive {{ task.active }} -->
+</div>

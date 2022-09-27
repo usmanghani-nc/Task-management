@@ -1,1 +1,45 @@
-<p>list-wrapper works!</p>
+<div class="p-[20px] flex flex-col items-center">
+  <h1 class="text-[32px] font-semibold mb-[20px]">Tasks</h1>
+
+  <ng-template #loadingBlock>
+    <div>loading...</div>
+  </ng-template>
+
+  <div *ngIf="!loading; else loadingBlock" class="mb-[20px] w-6/12">
+    <form #f="ngForm" (ngSubmit)="handleSubmit()">
+      <div class="mb-2">
+        <!-- <app-input
+          [inputValue]="task"
+          name="task"
+          placeholder="Task"
+          type="text"
+        ></app-input> -->
+
+        <input
+          type="text"
+          name="task"
+          class="w-full border p-[10px]"
+          placeholder="Task"
+          [(ngModel)]="task"
+          required
+        />
+      </div>
+      <div class="mb-2">
+        <textarea
+          name="description"
+          class="w-full border p-[10px]"
+          placeholder="Description"
+          [(ngModel)]="description"
+          required
+        ></textarea>
+      </div>
+      <app-button
+        type="submit"
+        [loading]="taskAddLoading"
+        text="Submit"
+      ></app-button>
+    </form>
+    <div class="my-[20px]"></div>
+    <app-list *ngFor="let task of data" [task]="task"></app-list>
+  </div>
+</div>

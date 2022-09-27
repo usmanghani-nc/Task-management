@@ -1,15 +1,48 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from '../../interface/task';
+import { TaskService } from '../../services/task.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-list-wrapper',
   templateUrl: './list-wrapper.component.html',
-  styleUrls: ['./list-wrapper.component.scss']
+  styleUrls: ['./list-wrapper.component.scss'],
 })
 export class ListWrapperComponent implements OnInit {
+  data: Task[] = [];
+  loading: boolean = true;
+  taskAddLoading: boolean = false;
+  task: string = '';
+  description: string = '';
 
-  constructor() { }
+  constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
+    this.taskService.getTasks().subscribe((el) => {
+      this.data = el.data.sort((a, b) => {
+        return moment(b.timestamp).valueOf() - moment(a.timestamp).valueOf();
+      });
+
+      console.log(this.data);
+      this.loading = false;
+    });
   }
 
+  handleSubmit() {
+    const newTask: Task = {
+      active: false,
+      done: false,
+      task: this.task,
+      description: this.description,
+    };
+
+    this.taskAddLoading = true;
+
+    this.taskService.addNewTask(newTask).subscribe((newData) => {
+      this.data = [newData.data, ...this.data];
+      this.task = '';
+      this.description = '';
+      this.taskAddLoading = false;
+    });
+  }
 }

@@ -22,7 +22,12 @@ module.exports = async ({ id, event }) => {
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'PUT',
+      },
       body: JSON.stringify({
         data: data,
         message: 'Item updated',
@@ -32,6 +37,12 @@ module.exports = async ({ id, event }) => {
   } catch (error) {
     return {
       statusCode: 501,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'PUT',
+      },
       body: JSON.stringify({
         error: error.message,
         status: 'error',

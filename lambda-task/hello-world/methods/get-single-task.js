@@ -12,7 +12,12 @@ module.exports = async ({ id }) => {
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET',
+      },
       body: JSON.stringify({
         data: data.Item,
         status: 'success',
@@ -21,6 +26,12 @@ module.exports = async ({ id }) => {
   } catch (error) {
     return {
       statusCode: 501,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET',
+      },
       body: JSON.stringify({
         error: error.message,
       }),

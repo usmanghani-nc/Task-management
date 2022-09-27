@@ -1,1 +1,7 @@
-<p>button works!</p>
+<button
+  class="w-full border rounded-lg text-white bg-slate-600 hover:bg-slate-400 ease-linear px-[20px] py-[10px] disabled:bg-gray-400 disabled:hover:bg-gray-400"
+  type="{{ type }}"
+  [disabled]="loading"
+>
+  {{ loading ? "loading..." : text }}
+</button>
