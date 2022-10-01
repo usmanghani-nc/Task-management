@@ -8,6 +8,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
 import { ListComponent } from './components/list/list.component';
 import { ListWrapperComponent } from './components/list-wrapper/list-wrapper.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { ListWrapperComponent } from './components/list-wrapper/list-wrapper.com
     ListComponent,
     ListWrapperComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, FontAwesomeModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,6 +1,10 @@
 <div
-  class="mb-[15px] border rounded-lg py-[17px] px-[20px] bg-slate-100"
-  (click)="onDelete(task)"
+  [ngClass]="
+    task.active
+      ? 'cursor-pointer border-green-600 border mb-[15px] rounded-lg py-[17px] px-[20px] bg-slate-100'
+      : 'cursor-pointer border mb-[15px] rounded-lg py-[17px] px-[20px] bg-slate-100'
+  "
+  (click)="onActive(task)"
 >
   <h2 class="mb-[3px] text-[20px] font-semibold">{{ task.task }}</h2>
   <p class="text-[15px] text-slate-500">{{ task.description }}</p>

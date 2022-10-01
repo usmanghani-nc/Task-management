@@ -40,6 +40,10 @@
       ></app-button>
     </form>
     <div class="my-[20px]"></div>
-    <app-list *ngFor="let task of data" [task]="task"></app-list>
+    <app-list
+      *ngFor="let task of data"
+      [task]="task"
+      [onActiveTask]="onActiveTask"
+    ></app-list>
   </div>
 </div>

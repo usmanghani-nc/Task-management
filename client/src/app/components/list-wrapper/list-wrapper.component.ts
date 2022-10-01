@@ -45,4 +45,16 @@ export class ListWrapperComponent implements OnInit {
       this.taskAddLoading = false;
     });
   }
+
+  onDeleteTask(t: Task) {
+    this.taskService.deleteTask(t).subscribe((task) => {
+      this.data = this.data.filter((el) => el.id !== t.id);
+    });
+  }
+
+  onActiveTask(t: Task) {
+    t.active = !t.active;
+
+    this.taskService.updateTaskActive(t).subscribe((task) => {});
+  }
 }

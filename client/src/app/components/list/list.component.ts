@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../interface/task';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-list',
@@ -8,8 +9,9 @@ import { Task } from '../../interface/task';
 })
 export class ListComponent implements OnInit {
   @Input() task: Task;
+  @Input() onActiveTask: any;
 
-  constructor() {
+  constructor(private taskService: TaskService) {
     this.task = {
       id: '',
       task: '',
@@ -25,6 +27,10 @@ export class ListComponent implements OnInit {
   }
 
   onDelete(t: Task) {
-    console.log(t);
+    this.taskService.deleteTask(t).subscribe((task) => {});
+  }
+
+  onActive(t: Task) {
+    this.onActiveTask(t);
   }
 }
