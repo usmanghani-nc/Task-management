@@ -44,6 +44,7 @@
       *ngFor="let task of data"
       [task]="task"
       [onActiveTask]="onActiveTask"
+      (onDeleteTask)="onDelete(task)"
     ></app-list>
   </div>
 </div>

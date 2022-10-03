@@ -1,13 +1,27 @@
 <div
   [ngClass]="
     task.active
-      ? 'cursor-pointer border-green-600 border mb-[15px] rounded-lg py-[17px] px-[20px] bg-slate-100'
-      : 'cursor-pointer border mb-[15px] rounded-lg py-[17px] px-[20px] bg-slate-100'
+      ? 'cursor-pointer border-green-600 border-[2px] mb-[15px] rounded-lg py-[17px] px-[20px] bg-slate-100'
+      : 'cursor-pointer border-[2px] mb-[15px] rounded-lg py-[17px] px-[20px] bg-slate-100'
   "
   (click)="onActive(task)"
 >
-  <h2 class="mb-[3px] text-[20px] font-semibold">{{ task.task }}</h2>
-  <p class="text-[15px] text-slate-500">{{ task.description }}</p>
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="mb-[3px] text-[20px] font-semibold">{{ task.task }}</h2>
+      <p class="text-[15px] text-slate-500">{{ task.description }}</p>
+    </div>
+
+    <div>
+      <div class="text-red-500 cursor-pointer" (click)="onDelete(task, $event)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </div>
+
+      <div class="text-blue-400 cursor-pointer">
+        <fa-icon [icon]="faFileEdit"></fa-icon>
+      </div>
+    </div>
+  </div>
   <!-- done : {{ task.done }} 
  acive {{ task.active }} -->
 </div>

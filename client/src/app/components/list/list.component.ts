@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../interface/task';
 import { TaskService } from '../../services/task.service';
-
+import { faTrash, faFileEdit } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -10,6 +10,11 @@ import { TaskService } from '../../services/task.service';
 export class ListComponent implements OnInit {
   @Input() task: Task;
   @Input() onActiveTask: any;
+
+  @Output() onDeleteTask = new EventEmitter<Task>();
+
+  faTrash = faTrash;
+  faFileEdit = faFileEdit;
 
   constructor(private taskService: TaskService) {
     this.task = {
@@ -26,8 +31,9 @@ export class ListComponent implements OnInit {
     console.log(this.task);
   }
 
-  onDelete(t: Task) {
-    this.taskService.deleteTask(t).subscribe((task) => {});
+  onDelete(t: Task, event: any) {
+    event.stopPropagation();
+    this.onDeleteTask.emit(t);
   }
 
   onActive(t: Task) {

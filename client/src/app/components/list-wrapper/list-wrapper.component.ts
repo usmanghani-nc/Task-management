@@ -23,7 +23,6 @@ export class ListWrapperComponent implements OnInit {
         return moment(b.timestamp).valueOf() - moment(a.timestamp).valueOf();
       });
 
-      console.log(this.data);
       this.loading = false;
     });
   }
@@ -46,15 +45,17 @@ export class ListWrapperComponent implements OnInit {
     });
   }
 
-  onDeleteTask(t: Task) {
+  onDelete(t: Task) {
+    // Delay need to improve ux add ex add loading state
     this.taskService.deleteTask(t).subscribe((task) => {
       this.data = this.data.filter((el) => el.id !== t.id);
     });
   }
 
   onActiveTask(t: Task) {
-    t.active = !t.active;
-
-    this.taskService.updateTaskActive(t).subscribe((task) => {});
+    // Delay need to improve ux add ex add loading state
+    this.taskService.updateTaskActive(t).subscribe((task) => {
+      t.active = !t.active;
+    });
   }
 }
