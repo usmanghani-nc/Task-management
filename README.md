@@ -1,5 +1,8 @@
 ﻿# Task management app
- 
-Tech used 
-Angular 14 and AWS-serverless(NodeJS) with SAM CLI 
+
+Tech used
+Angular 14, AWS-serverless(NodeJS) with SAM CLI
 Lambda + API Gateway + DynamoDB
+i use AWS S3 to hotst my angular code
+
+URL => http://usmanghanidev-angular-taskapp.s3-website.eu-central-1.amazonaws.com/
