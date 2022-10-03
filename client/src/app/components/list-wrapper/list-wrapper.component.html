@@ -45,6 +45,8 @@
       [task]="task"
       [onActiveTask]="onActiveTask"
       (onDeleteTask)="onDelete(task)"
+      (onTaskDone)="onDone(task)"
+      [cardLoading]="cardLoading === task.id ? true : false"
     ></app-list>
   </div>
 </div>

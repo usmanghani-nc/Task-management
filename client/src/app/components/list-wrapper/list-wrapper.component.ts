@@ -14,6 +14,8 @@ export class ListWrapperComponent implements OnInit {
   taskAddLoading: boolean = false;
   task: string = '';
   description: string = '';
+  edit: boolean = false;
+  cardLoading: any = false;
 
   constructor(private taskService: TaskService) {}
 
@@ -47,15 +49,39 @@ export class ListWrapperComponent implements OnInit {
 
   onDelete(t: Task) {
     // Delay need to improve ux add ex add loading state
+
+    this.cardLoading = t.id;
+
     this.taskService.deleteTask(t).subscribe((task) => {
       this.data = this.data.filter((el) => el.id !== t.id);
+      this.cardLoading = false;
+
+      console.log(task, '<= deleteTask.subscribe');
     });
   }
 
   onActiveTask(t: Task) {
-    // Delay need to improve ux add ex add loading state
+    this.cardLoading = t.id;
+
     this.taskService.updateTaskActive(t).subscribe((task) => {
       t.active = !t.active;
+      this.cardLoading = false;
+
+      console.log(task, '<= updateTaskActive.subscribe');
+    });
+  }
+
+  onDone(t: Task) {
+    this.cardLoading = t.id;
+
+    const newTask = {
+      ...t,
+      done: !t.done,
+    };
+    this.taskService.updateTaskDone(newTask).subscribe((task) => {
+      console.log(task, '<= newTask.subscribe');
+      this.cardLoading = false;
+      t.done = !t.done;
     });
   }
 }

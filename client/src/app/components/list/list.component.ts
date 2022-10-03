@@ -1,7 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../interface/task';
 import { TaskService } from '../../services/task.service';
-import { faTrash, faFileEdit } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTrash,
+  faFileEdit,
+  faCheckCircle,
+} from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -10,11 +14,13 @@ import { faTrash, faFileEdit } from '@fortawesome/free-solid-svg-icons';
 export class ListComponent implements OnInit {
   @Input() task: Task;
   @Input() onActiveTask: any;
-
+  @Input() cardLoading: any;
   @Output() onDeleteTask = new EventEmitter<Task>();
+  @Output() onTaskDone = new EventEmitter<Task>();
 
   faTrash = faTrash;
   faFileEdit = faFileEdit;
+  faCheckCircle = faCheckCircle;
 
   constructor(private taskService: TaskService) {
     this.task = {
@@ -27,9 +33,7 @@ export class ListComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
-    console.log(this.task);
-  }
+  ngOnInit(): void {}
 
   onDelete(t: Task, event: any) {
     event.stopPropagation();
@@ -38,5 +42,10 @@ export class ListComponent implements OnInit {
 
   onActive(t: Task) {
     this.onActiveTask(t);
+  }
+
+  onDone(t: Task, event: any) {
+    event.stopPropagation();
+    this.onTaskDone.emit(t);
   }
 }

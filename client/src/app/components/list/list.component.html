@@ -1,3 +1,12 @@
+<ng-template #loadingBlock>
+  <div class="select-none">
+    <div
+      class="bg-gray-200 w-full animate-pulse h-5 rounded-2xl mb-[10px]"
+    ></div>
+    <div class="bg-gray-200 animate-pulse w-[50%] h-3 rounded-2xl"></div>
+  </div>
+</ng-template>
+
 <div
   [ngClass]="
     task.active
@@ -6,22 +15,34 @@
   "
   (click)="onActive(task)"
 >
-  <div class="flex items-center justify-between">
+  <div
+    *ngIf="!cardLoading; else loadingBlock"
+    class="flex items-center justify-between"
+  >
     <div>
       <h2 class="mb-[3px] text-[20px] font-semibold">{{ task.task }}</h2>
       <p class="text-[15px] text-slate-500">{{ task.description }}</p>
     </div>
 
     <div>
+      <div
+        [ngClass]="
+          task.done
+            ? 'text-green-500 cursor-pointer'
+            : 'text-yellow-500 cursor-pointer'
+        "
+        (click)="onDone(task, $event)"
+      >
+        <fa-icon [icon]="faCheckCircle"></fa-icon>
+      </div>
+
       <div class="text-red-500 cursor-pointer" (click)="onDelete(task, $event)">
         <fa-icon [icon]="faTrash"></fa-icon>
       </div>
 
-      <div class="text-blue-400 cursor-pointer">
+      <!-- <div class="text-blue-400 cursor-pointer">
         <fa-icon [icon]="faFileEdit"></fa-icon>
-      </div>
+      </div> -->
     </div>
   </div>
-  <!-- done : {{ task.done }} 
- acive {{ task.active }} -->
 </div>
